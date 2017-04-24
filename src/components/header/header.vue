@@ -25,7 +25,10 @@
 		<div class="bulletin-wrapper">
 				<span class="bulletin-title"><span></span></span>
 				<span class="bulletin-text">{{ seller.bulletin }}</span>
-			</div>
+		</div>
+		<div class="background">
+			<img :src="seller.avatar" width="100%" height="100%">
+		</div>
 	</div>
 </template>
 <script type="text/javascript">
@@ -43,8 +46,9 @@
 <style lang="stylus" rel="stylesheet/stylus" scroped>
 @import "../../common/stylus/mixin.styl"
 .header
-	background: #999
+	position: relative
 	color: #fff
+	background: rgba(7,17,27,0.2)
 	.content-wrapper
 		position: relative
 		padding: 24px 12px 18px 24px
@@ -119,6 +123,7 @@
 		white-space: nowrap
 		overflow: hidden
 		text-overflow: ellipsis
+		background: rgba(7,17,27,0.2)
 		// font-size: 0px
 		.bulletin-title
 			display: inline-block
@@ -133,6 +138,13 @@
 			vertical-align: top
 			margin: 0 4px
 			font-size: 10px	
-				
+	.background
+		position:absolute
+		left: 0
+		top: 0
+		width: 100%
+		height: 100%
+		z-index: -1	
+		filter: blur(10px)	
 
 </style>
