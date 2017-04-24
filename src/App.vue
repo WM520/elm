@@ -1,0 +1,38 @@
+<template>
+  <div>
+    <v-header :seller="seller"></v-header>
+    <tabbar></tabbar>
+    <router-view></router-view>
+  </div>
+</template>
+
+<script>
+const ERR_OK = 0
+import Header from '@/components/header/header.vue'
+import Tabbar from '@/components/tabbar/tabbar.vue'
+export default {
+  data () {
+	return {
+		seller: {}
+	}
+  },
+  created() {
+  	this.$http.get('/api/seller').then((response) => {
+  		response = response.body
+      console.log(response)
+  		if (response.errno === ERR_OK) {
+  			this.seller = response.data
+  		}
+  	})
+  },
+  components: {
+    'v-header': Header,
+    'tabbar': Tabbar
+  }
+}
+</script>
+
+<style>
+
+
+</style>
