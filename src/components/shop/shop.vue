@@ -3,11 +3,14 @@
 		<div class="content">
 			<div class="content-left">
 				<div class="logo-wrapper">
-					<div class="logo">
-						<i class="icon-shopping_cart"></i>
+					<div class="logo" :class="{'high':totalCount>0}">
+						<i class="icon-shopping_cart" :class="{'high':totalCount>0}"></i>
+					</div>
+					<div class="num">
+						{{totalCount}}
 					</div>
 				</div>
-				<div class="price">￥ 0</div>
+				<div class="price" :class="{'high':totalCount>0}">￥{{totalPrice}}</div>
 				<div class="desc">需要{{deliveryPrice}}元起送</div>
 			</div>
 			<div class="content-right">
@@ -21,6 +24,15 @@
 <script type="text/javascript">
 	export default {
 		props: {
+			selectFoods: {
+				type: Array,
+				default() {
+					return [{
+						price: 10,
+						count: 1
+					}]
+				}
+			},
 			deliveryPrice: {
 				type: Number,
 				default: 0
@@ -28,6 +40,22 @@
 			minPrice: {
 				type: Number,
 				default: 0
+			}
+		},
+		computed: {
+			totalPrice() {
+				let total = 0
+				this.selectFoods.forEach((food) => {
+					total += food.price * food.count
+				})
+				return total
+			},
+			totalCount() {
+				let count = 0
+				this.selectFoods.forEach((food) => {
+					count += food.count
+				})
+				return count
 			}
 		}
 	}
@@ -64,10 +92,28 @@
 						border-radius: 50%
 						background: #2b343c
 						text-align: center
+						&.high
+							background: rgb(0,160,220)
 						.icon-shopping_cart
 							line-height: 44px
 							font-size: 24px
 							color: #80858a
+							&.high
+								color: #fff
+					.num
+						position: absolute
+						top: 0
+						right: 0
+						width: 24px
+						height: 16px
+						line-height: 16px
+						text-align: center
+						border-radius: 16px
+						font-size: 9px
+						font-weight: 700
+						color: #fff
+						background: rgb(240, 20, 20)
+						box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4)
 				.price
 					display: inline-block
 					vertical-align: top
@@ -79,6 +125,8 @@
 					font-size: 16px
 					font-weight: 700
 					color: rgba(255, 255, 255, 0.4)
+					&.high
+						color: rgb(255, 255, 255)					
 				.desc
 					display: inline-block
 					vertical-align: top
