@@ -96,7 +96,8 @@ const ERR_OK = 0
 					probeType: 3
 				})
 				this.foodsScroll.on('scroll', (pos) => {
-					this.scrollY = Math.abs(Math.round(pos.Y))
+					this.scrollY = Math.abs(Math.round(pos.y))
+					console.log(this.scrollY)
 				})
 			},
 			_calculateHeight() {
