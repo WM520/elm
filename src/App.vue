@@ -2,7 +2,7 @@
   <div>
     <v-header :seller="seller"></v-header>
     <tabbar></tabbar>
-    <router-view></router-view>
+    <router-view :seller="seller"></router-view>
   </div>
 </template>
 

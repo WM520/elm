@@ -8,14 +8,29 @@
 					</div>
 				</div>
 				<div class="price">￥ 0</div>
-				<div class="desc"></div>
+				<div class="desc">需要{{deliveryPrice}}元起送</div>
 			</div>
-			<div class="content-right"></div>
+			<div class="content-right">
+				<div class="pay">
+					￥{{minPrice}}起送
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
 <script type="text/javascript">
-	export default {}
+	export default {
+		props: {
+			deliveryPrice: {
+				type: Number,
+				default: 0
+			},
+			minPrice: {
+				type: Number,
+				default: 0
+			}
+		}
+	}
 </script>
 <style lang="stylus" rel="stylesheet/stylus" scroped>
 	.shopCart
@@ -66,7 +81,21 @@
 					color: rgba(255, 255, 255, 0.4)
 				.desc
 					display: inline-block
+					vertical-align: top
+					margin: 12px 0 0 12px
+					line-height: 24px
+					font-size: 12px
+					color: rgba(255, 255, 255, 0.4)
 			.content-right
 				flex: 0 0 105px
 				width: 105px
+				.pay
+					height: 48px
+					line-height: 48px
+					text-align: center
+					font-size: 12px
+					color: rgba(255, 255, 255, 0.4)
+					font-weight: 700
+					background: #2b333b
+					
 </style>
