@@ -2,13 +2,16 @@ border-1px($color)
 	position: relative
 	&:after
 		display: block
-		postion: absolute
+		position: absolute
 		left: 0
 		bottom: 0
 		width: 100%
 		border-top: 1px solic $color
 		content: ''
-		
+
+border-none()
+	&:after
+		display: none	
 
 bg-image($url)
 	background-image:url($url + "@2x.png")

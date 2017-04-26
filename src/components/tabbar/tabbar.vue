@@ -15,6 +15,7 @@
   export default {}
 </script>
 <style scoped>
+/*@import "../../common/stylus/mixin.styl"*/
 .tabbar {
   display: flex;
   line-height: 40px;
