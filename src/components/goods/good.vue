@@ -37,12 +37,14 @@
 				</li>
 			</ul>
 		</div>
+	<shopCart></shopCart>
 	</div>
 	
 
 </template>
 <script type="text/javascript">
 import BScroll from 'better-scroll'
+import shopCart from '@/components/shop/shop'
 const ERR_OK = 0
 	export default {
 		data() {
@@ -111,6 +113,9 @@ const ERR_OK = 0
 				}
 				console.log(this.listHeight)
 			}
+		},
+		components: {
+			shopCart
 		}
 
 	}
@@ -175,7 +180,7 @@ const ERR_OK = 0
 				padding-left: 14px
 				height: 26px
 				line-height: 26px
-				border-left: 2px solid #d9dde1
+				border-left: 2px solid #d9dde1shop
 				font-size: 12px
 				color: rgb(147, 153, 159)
 				background: #f3f5f7
