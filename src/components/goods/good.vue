@@ -31,13 +31,16 @@
 									<span class="now">${{food.price}}</span>
 									<span v-show="food.oldPrice" class="old">${{food.oldPrice}}</span>
 								</div>
+								<div class="cartcontrol-wrapper">
+									<cartcontrol :food="food"></cartcontrol>
+								</div>
 							</div>
 						</li>
 					</ul>
 				</li>
 			</ul>
 		</div>
-	<shopCart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopCart>
+	<shopCart :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopCart>
 	</div>
 	
 
@@ -45,6 +48,7 @@
 <script type="text/javascript">
 import BScroll from 'better-scroll'
 import shopCart from '@/components/shop/shop'
+import cartcontrol from '@/components/cartcontrol/cartcontrol'
 const ERR_OK = 0
 	export default {
 		props: {
@@ -77,13 +81,23 @@ const ERR_OK = 0
 				for (var i = 0; i < this.listHeight.length - 1; i++) {
 					let height1 = this.listHeight[i]
 					let height2 = this.listHeight[ i + 1 ]
-					console.log(i)
 					if (!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {
 						// console.log(i)
 						return i
 					}
 				}
 				return 0
+			},
+			selectFoods() {
+				let foods = []
+				this.goods.forEach((good) => {
+					good.foods.forEach((food) => {
+						if (food.count) {
+							foods.push(food)
+						}
+					})
+				})
+				return foods
 			}
 		},
 		methods: {
@@ -100,11 +114,11 @@ const ERR_OK = 0
 					click: true
 				})
 				this.foodsScroll = new BScroll(this.$refs.good, {
-					probeType: 3
+					probeType: 3,
+					click: true
 				})
 				this.foodsScroll.on('scroll', (pos) => {
 					this.scrollY = Math.abs(Math.round(pos.y))
-					console.log(this.scrollY)
 				})
 			},
 			_calculateHeight() {
@@ -116,11 +130,11 @@ const ERR_OK = 0
 					height += item.clientHeight
 					this.listHeight.push(height)
 				}
-				console.log(this.listHeight)
 			}
 		},
 		components: {
-			shopCart
+			shopCart,
+			cartcontrol
 		}
 
 	}
@@ -232,6 +246,10 @@ const ERR_OK = 0
 							text-decoration: line-through
 							font-size: 10px
 							color: rgb(147, 153, 159)
+					.cartcontrol-wrapper
+						position: absolute
+						right: 0
+						bottom: 12px
 						
 			
 </style>
