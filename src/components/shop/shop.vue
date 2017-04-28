@@ -14,7 +14,7 @@
 				<div class="desc">另需配送费{{deliveryPrice}}元</div>
 			</div>
 			<div class="content-right">
-				<div class="pay" :class="payClass">
+				<div class="pay" :class="payClass" @click="pay">
 					{{payDesc}}
 				</div>
 			</div>
@@ -72,6 +72,18 @@
 					return 'not-enough'
 				} else {
 					return 'enough'
+				}
+			}
+		},
+		methods: {
+			pay() {
+				if (this.totalPrice > this.minPrice) {
+					this.selectFoods.forEach((food) => {
+						food.count = 0
+					})
+					alert('结算成功')
+				} else {
+					alert('请继续添加商品')
 				}
 			}
 		}
